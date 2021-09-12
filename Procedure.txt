@@ -1,0 +1,19 @@
+delimiter $
+create procedure getStudents()
+begin
+select * from students;
+end$
+
+call getStudents()$
+
+create procedure insertStudent(IN name varchar(200), IN course varchar(200), IN fee float, OUT totalStudents int)
+begin
+declare total int default 0;
+insert into students(name,course,fee) values(name,course, fee);
+select count(roll) into total from students;
+set totalStudents = total;
+select total;
+end $
+
+call insertStudent('Rohit','C++',5000,@result)$
+select @result $
